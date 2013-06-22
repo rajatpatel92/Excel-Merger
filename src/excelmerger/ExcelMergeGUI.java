@@ -455,43 +455,36 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                 System.out.println("Used Destination Cell... Row : "+rowDest+" Column "+columnDest);
             }
             else{
-                HSSFSheet tempsheet = workbook.getSheetAt(0);
-                int destRowCount=0;
-                for (Row temprow : tempsheet) {
-                    for (Cell tempcell : temprow) {
-                        destRowCount++;
-                    }
-                }
+                int destRowCount=getNoOfRows(workbook.getSheetAt(0));
                 rowDest=destRowCount+1;
                 columnDest=1;
                 System.out.println("Didnt Used Destination Cell... Row : "+rowDest+" Column "+columnDest);
             }
             //Destination Code Implementation following....
             if(processedData.length == 1){
-                System.out.println("Row: "+rowDest+" Column: "+columnDest+" ProcessedData: "+processedData[0]);
-                //try{
-                    //row = sheet.getRow(0);
-                    //System.out.println("Exited row Try");
-                //}catch(NullPointerException ex){
-                    //System.out.println("Entered row  catch");
-                    row = sheet.createRow(0);
-                //}
-                
-                
-                
-                
-                cell = row.createCell(0);//Continue From Here....
-                
-                
-                
-                
+                int resultRowCount=getNoOfRows(workbook.getSheetAt(0));
+                System.out.println("Row: "+rowDest+" Column: "+columnDest+" ProcessedData: "+processedData[0]+" ResultRowCount "+resultRowCount);
+                if(rowDest<=resultRowCount){
+                    row = sheet.getRow(rowDest-1);
+                    cell = row.createCell(columnDest-1);
+                }
+                else{
+                    row = sheet.createRow(rowDest-1);
+                    cell = row.createCell(columnDest-1);
+                }
                 cell.setCellValue(processedData[0]);
             }else{
                 for(int j=0; j<processedData.length; j++, rowDest++){
-                    System.out.println("Row: "+rowDest+" Column: "+columnDest+" ProcessedData: "+processedData[j]);
+                    int resultRowCount=getNoOfRows(workbook.getSheetAt(0));
+                    System.out.println("Row: "+rowDest+" Column: "+columnDest+" ProcessedData: "+processedData[0]+" ResultRowCount "+resultRowCount);
+                    if(rowDest<=resultRowCount){
+                    row = sheet.getRow(rowDest-1);
+                    cell = row.createCell(columnDest-1);
+                }
+                else{
                     row = sheet.createRow(rowDest-1);
                     cell = row.createCell(columnDest-1);
-                    cell.setCellValue(processedData[j]);
+                }cell.setCellValue(processedData[j]);
                 }
             }
             workbook.write(fileOut);
@@ -538,7 +531,16 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
+public int getNoOfRows(HSSFSheet tempsheet){
+    int destRowCount=0;
+                for (Row temprow : tempsheet) {
+                    /*for (Cell tempcell : temprow) {
+                        destRowCount++;
+                    }*/
+                    destRowCount++;
+                }
+                return destRowCount;
+}
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setMultiSelectionEnabled(true);
