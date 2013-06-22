@@ -633,6 +633,8 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         this.jTextField6.setEditable(true);
         this.jTextField6.setText("Select Destination Folder...");
         this.jTextField6.setEditable(false);
+        this.jLabel5.setText("");
+        this.jLabel5.setVisible(false);
         System.out.println("Reset Executed");
     }//GEN-LAST:event_jButton4ActionPerformed
 
