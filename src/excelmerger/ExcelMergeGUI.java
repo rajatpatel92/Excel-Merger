@@ -469,13 +469,13 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             //Destination Code Implementation following....
             if(processedData.length == 1){
                 System.out.println("Row: "+rowDest+" Column: "+columnDest+" ProcessedData: "+processedData[0]);
-                try{
-                    row = sheet.getRow(0);
-                    System.out.println("Exited row Try");
-                }catch(NullPointerException ex){
-                    System.out.println("Entered row  catch");
+                //try{
+                    //row = sheet.getRow(0);
+                    //System.out.println("Exited row Try");
+                //}catch(NullPointerException ex){
+                    //System.out.println("Entered row  catch");
                     row = sheet.createRow(0);
-                }
+                //}
                 
                 
                 
