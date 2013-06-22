@@ -1,6 +1,8 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Excel-Merger App
+ * Developed by :
+ *  1. Rajat Patel
+ *  2. Nikhil Menghani
  */
 package excelmerger;
 
@@ -32,9 +34,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Rajat
  */
 public class ExcelMergeGUI extends javax.swing.JFrame {
-    private int ERROR_MESSAGE;
-    boolean flag=false;
-
     /**
      * Creates new form ExcelMergeGUI
      */
@@ -469,22 +468,8 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             //Destination Code Implementation following....
             if(processedData.length == 1){
                 System.out.println("Row: "+rowDest+" Column: "+columnDest+" ProcessedData: "+processedData[0]);
-                //try{
-                    //row = sheet.getRow(0);
-                    //System.out.println("Exited row Try");
-                //}catch(NullPointerException ex){
-                    //System.out.println("Entered row  catch");
                     row = sheet.createRow(0);
-                //}
-                
-                
-                
-                
                 cell = row.createCell(0);//Continue From Here....
-                
-                
-                
-                
                 cell.setCellValue(processedData[0]);
             }else{
                 for(int j=0; j<processedData.length; j++, rowDest++){
@@ -502,14 +487,9 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             jLabel5.setText("File Successfully written to : "+destPath+"\\Result.xls");
             
             JOptionPane.showMessageDialog(rootPane,"File Operation Successful!!");
-            //jOptionPane1.setMessageType(jOptionPane1.ERROR_MESSAGE);
             } catch (FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(rootPane,"File Result.xls is open somewhere\nClose it and try again.");
                 Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
-                /*jOptionPane1.setEnabled(true);
-                jOptionPane1.setMessageType(jOptionPane1.ERROR_MESSAGE);
-                jOptionPane1.setMessage("File is open somewhere. Please Close the file and try again.");
-                jOptionPane1.setVisible(true);*/
             } catch (IOException ex) {
                 Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -596,10 +576,6 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField6MouseClicked
 
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
-        //jDialog2.setType(Type.POPUP);
-        //jDialog2.setVisible(rootPaneCheckingEnabled);
-        //jOptionPane1.add(jDialog2);
-        //jOptionPane1.showMessageDialog(rootPane,"File Operation Successful!!");
         jOptionPane1.showMessageDialog(rootPane, "This utility is developed by :\n1. Rajat Patel\n2. Nikhil Menghani\n\nSpecial Thanks to Kuntesh Jani Sir to guide us.");
         jOptionPane1.setVisible(true);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
@@ -643,9 +619,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         jProgressBar1.setStringPainted(true);
         filePaths = path.split(";");
         int checkOp=1;
-        //int checkOp = temp1;
         double temp[] = new double[filePaths.length];
-        //double tempAdd = 0;
         for(int i=0; i<filePaths.length; i++){
             System.out.println(filePaths[i]);
             jProgressBar1.setValue((i+1)*10);
@@ -697,7 +671,6 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -711,6 +684,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     private int rowCount;
     private int columnCount;
     private String[] filePaths;
+    private boolean flag=false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentsMenuItem;
