@@ -152,7 +152,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
 
         jLabel6.setText("Type of operation :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Addition", "NoOperation(Append all cells)" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NoOperation(Append all cells)", "Addition" }));
 
         jLabel7.setText("Source Cell Location : (Must be same on every sheet)");
 
