@@ -458,7 +458,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                 int destRowCount=getNoOfRows(workbook.getSheetAt(0));
                 rowDest=destRowCount+1;
                 columnDest=1;
-                System.out.println("Didnt Used Destination Cell... Row : "+rowDest+" Column "+columnDest);
+                System.out.println("Didnt Use Destination Cell... Row : "+rowDest+" Column "+columnDest);
             }
             //Destination Code Implementation following....
             if(processedData.length == 1){
