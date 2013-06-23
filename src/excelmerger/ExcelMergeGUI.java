@@ -461,25 +461,22 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             if(this.path.equals("")||(this.jTextField6.getText().equals("Select Destination Folder..."))){
                 throw new FileNotFoundException();
             }
+            if (this.jTextField7.getText().length()>3||this.jTextField8.getText().length()>3){
+                throw new InvalidCellValueException("Invalid Cell Value");
+            }
         if(jTextField7.getText()==null){
             rowCount = Integer.parseInt(jTextField2.getText());
             columnCount = Integer.parseInt(jTextField3.getText());
         }else{
             String cellName = jTextField7.getText();
-            if(cellName.length()>3){
-                jOptionPane1.showMessageDialog(rootPane,"Wrong Cell Value. Enter Correct Cell Value!!");
-                this.jTextField7.setText("");
-            }else{
-                int Loc[] = getCellLocation(cellName);
-                rowCount = Loc[1];
-                columnCount = Loc[0];
-            }
-            //jOptionPane1.showMessageDialog(rootPane,"Wrong Cell Value. Enter Correct Cell Value!!");
+            int Loc[] = getCellLocation(cellName);
+            rowCount = Loc[1];
+            columnCount = Loc[0];
         }
         String operation = (String) jComboBox1.getSelectedItem();
         int rowDest=1;
         int columnDest=1;
-        
+
         double[] processedData;
         jLabel5.setText("Processing....please wait!!");
         processedData = this.processCells(rowCount, columnCount, operation);
@@ -508,18 +505,14 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             if(this.flag1){
                 rowDest = Integer.parseInt(jTextField4.getText());
                 columnDest = Integer.parseInt(jTextField5.getText());
-                System.out.println("Used Destination Cell... Row : "+rowDest+" Column "+columnDest);
-            }else if(this.flag2){
-                String cellName = jTextField8.getText();
-                if(cellName.length()>3){
-                    jOptionPane1.showMessageDialog(rootPane,"Wrong Cell Value. Enter Correct Cell Value!!");
-                    this.jTextField8.setText("");
-                }else{
-                    int Loc[] = getCellLocation(cellName);
-                    rowCount = Loc[1];
-                    columnCount = Loc[0];
-                    System.out.println("Used Destination Cell... Row : "+rowDest+" Column "+columnDest);
-                }
+                System.out.println("Used Destination Cell... Row : "+rowDest+" Column "+columnDest+"in flag1");
+            }
+            if(this.flag2){
+                String cName = jTextField8.getText();
+                int Loc[] = getCellLocation(cName);
+                rowDest = Loc[1];
+                columnDest = Loc[0];
+                System.out.println("Used Destination Cell... Row : "+rowDest+" Column "+columnDest+"in flag2");
             }else{
                 int destRowCount=getNoOfRows(workbook.getSheetAt(0));
                 rowDest=destRowCount+1;
@@ -566,6 +559,21 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                 Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(rootPane,"Internal Error Occured. Please Try Again!!");
+                this.reset();
+            }
+        }catch(ArrayIndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(rootPane,"Enter Correct Values of Cell and Try Again..!!");
+            jTextField7.setText("");
+            if(this.flag2){
+                this.jTextField8.setText("");
+            }
+        }catch(InvalidCellValueException ex){
+            Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
+            jOptionPane1.showMessageDialog(rootPane,"Wrong Cell Value. Enter Correct Cell Value!!");
+            this.jTextField7.setText("");
+            if(this.flag2){
+                this.jTextField8.setText("");
             }
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(rootPane,"Enter Correct Values of Cell and Try Again..!!");
@@ -590,7 +598,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             else if(this.jTextField6.getText().equals("Select Destination Folder...")){
                 JOptionPane.showMessageDialog(rootPane,"Select Destination First..!!");
             }
-        }
+        } 
     }//GEN-LAST:event_jButton2ActionPerformed
     private int getNoOfRows(HSSFSheet tempsheet){
         int destRowCount=0;
@@ -664,35 +672,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        this.jTextField1.setEditable(true);
-        this.jTextField1.setText("Browse Files from here...");
-        this.jTextField1.setEditable(false);
-        this.jTextField2.setText("");
-        this.jTextField3.setText("");
-        if(this.flag1){
-            this.jTextField4.setText("");
-            this.jTextField5.setText("");
-        }else if(this.flag2){
-            this.jTextField8.setText("");
-        }
-        else{
-            this.jTextField4.setEditable(true);
-            this.jTextField4.setText("");
-            this.jTextField4.setEditable(false);
-            this.jTextField5.setEditable(true);
-            this.jTextField5.setText("");
-            this.jTextField5.setEditable(false);
-            this.jTextField8.setEditable(true);
-            this.jTextField8.setText("");
-            this.jTextField8.setEditable(false);
-        }
-        this.jTextField6.setEditable(true);
-        this.jTextField6.setText("Select Destination Folder...");
-        this.jTextField6.setEditable(false);
-        this.jTextField7.setText("");
-        this.jLabel5.setText("");
-        this.jLabel5.setVisible(false);
-        System.out.println("Reset Executed");
+        this.reset();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -704,7 +684,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-       System.out.println("Value of Flag Before: "+this.flag2);
+        System.out.println("Value of Flag Before: "+this.flag2);
         this.jTextField8.setEditable(!this.flag2);
         this.jTextField5.setEditable(!this.flag2);
         this.flag2=!this.flag2;
@@ -765,7 +745,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         
     }
     
-    private int[] getCellLocation(String cell){
+    private int[] getCellLocation(String cell) throws ArrayIndexOutOfBoundsException{
         int tempColLoc = 0;
         int[] locations = new int[2];
         String cellName = cell.trim().toUpperCase();
@@ -786,6 +766,46 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         System.out.println("Column : "+ tempColLoc +"row :"+locations[1]);
         locations[0] = tempColLoc;
         return locations;
+    }
+    
+    private void reset(){
+        this.destPath = "";
+        this.path = "";
+        this.rowCount = 0;
+        this.columnCount = 0;
+        this.filePaths = null;
+        this.flag1 = false;
+        this.flag2 = false;
+        this.jProgressBar1.setValue(0);
+        this.jTextField1.setEditable(true);
+        this.jTextField1.setText("Browse Files from here...");
+        this.jTextField1.setEditable(false);
+        this.jTextField2.setText("");
+        this.jTextField3.setText("");
+        if(this.flag1){
+            this.jTextField4.setText("");
+            this.jTextField5.setText("");
+        }else if(this.flag2){
+            this.jTextField8.setText("");
+        }
+        else{
+            this.jTextField4.setEditable(true);
+            this.jTextField4.setText("");
+            this.jTextField4.setEditable(false);
+            this.jTextField5.setEditable(true);
+            this.jTextField5.setText("");
+            this.jTextField5.setEditable(false);
+            this.jTextField8.setEditable(true);
+            this.jTextField8.setText("");
+            this.jTextField8.setEditable(false);
+        }
+        this.jTextField6.setEditable(true);
+        this.jTextField6.setText("Select Destination Folder...");
+        this.jTextField6.setEditable(false);
+        this.jTextField7.setText("");
+        this.jLabel5.setText("");
+        this.jLabel5.setVisible(false);
+        System.out.println("Reset Executed");
     }
     /**
      * @param args the command line arguments
