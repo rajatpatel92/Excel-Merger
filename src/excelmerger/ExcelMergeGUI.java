@@ -62,8 +62,6 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
         jTextField6 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -75,16 +73,16 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jTextField4 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
@@ -119,7 +117,6 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ExcelMerger");
-        setPreferredSize(new java.awt.Dimension(600, 450));
 
         jTextField1.setEditable(false);
         jTextField1.setText("Browse Files from here...");
@@ -147,10 +144,6 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
 
         jLabel5.setText("jLabel5");
 
-        jLabel6.setText("Type of operation :");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Addition", "NoOperation(Append all cells)" }));
-
         jTextField6.setEditable(false);
         jTextField6.setText("Select Destination Folder...");
         jTextField6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -173,6 +166,12 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             }
         });
 
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
+
         jCheckBox2.setText("Set Custom Destination");
         jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +185,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
 
         jLabel11.setText("Enter Source Cell Name :");
 
-        jLabel13.setText("label");
+        jLabel13.setText("(Must be same on every excel sheet)");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -196,20 +195,20 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jCheckBox2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(307, 307, 307))))
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel13)
+                        .addGap(308, 308, 308))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(473, 473, 473))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jCheckBox2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +217,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField7)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13))
                 .addGap(13, 13, 13)
                 .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(7, 7, 7)
@@ -230,93 +229,94 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Enter By Cell Name", jPanel2);
 
+        jPanel3.setPreferredSize(new java.awt.Dimension(700, 136));
+
         jCheckBox1.setText("Set Custom Destination");
-        jCheckBox1.setPreferredSize(null);
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
             }
         });
 
+        jTextField4.setEditable(false);
+
         jLabel8.setText("Destination Cell Location:");
+
+        jLabel9.setText("Enter Row Number :");
+
+        jLabel10.setText("Enter Column Number :");
+
+        jTextField5.setEditable(false);
 
         jLabel7.setText("Source Cell Location :");
 
         jLabel2.setText("Enter Row Number :");
 
-        jLabel9.setText("Enter Row Number :");
-
-        jTextField4.setEditable(false);
-
-        jTextField5.setEditable(false);
-
-        jLabel10.setText("Enter Column Number :");
-
         jLabel3.setText("Enter Column Number :");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69))
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jCheckBox1))
+                        .addContainerGap(72, Short.MAX_VALUE))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(26, 26, 26))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField2)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3))
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(41, 41, 41))
         );
 
-        jTabbedPane1.addTab("Enter By Cell Destination", jPanel1);
+        jTabbedPane1.addTab("Enter By Cell Destination", jPanel3);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -357,28 +357,21 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(28, 28, 28)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addGap(121, 121, 121)
-                                                .addComponent(jButton2)
-                                                .addGap(49, 49, 49)
-                                                .addComponent(jButton4))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButton3)))
-                                        .addGap(0, 3, Short.MAX_VALUE)))
-                                .addContainerGap(13, Short.MAX_VALUE))))
+                                        .addGap(121, 121, 121)
+                                        .addComponent(jButton2)
+                                        .addGap(49, 49, 49)
+                                        .addComponent(jButton4))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton3)))
+                                .addGap(0, 2, Short.MAX_VALUE)))
+                        .addContainerGap(13, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -388,7 +381,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                                     .addComponent(jButton1))
                                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1))
-                        .addContainerGap())))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -398,18 +391,14 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
@@ -417,7 +406,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -455,161 +444,35 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             System.out.println("File access cancelled by user.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+          
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try{
-            if(this.path.equals("")||(this.jTextField6.getText().equals("Select Destination Folder..."))){
-                throw new FileNotFoundException();
-            }
+        jLabel5.setText("Processing....please wait!!");
+        try {
+            refineFile(destPath+"\\Result.xls");
+            FileInputStream fileIn = new FileInputStream(new File(destPath+"\\Result.xls"));
+            HSSFWorkbook workbook =  new HSSFWorkbook(fileIn);;
             if (this.jTextField7.getText().length()>3||this.jTextField8.getText().length()>3){
                 throw new InvalidCellValueException("Invalid Cell Value");
             }
-        if(jTextField7.getText()==null){
-            rowCount = Integer.parseInt(jTextField2.getText());
-            columnCount = Integer.parseInt(jTextField3.getText());
-        }else{
-            String cellName = jTextField7.getText();
-            int Loc[] = getCellLocation(cellName);
-            rowCount = Loc[1];
-            columnCount = Loc[0];
-        }
-        String operation = (String) jComboBox1.getSelectedItem();
-        int rowDest=1;
-        int columnDest=1;
-
-        double[] processedData;
-        jLabel5.setText("Processing....please wait!!");
-        processedData = this.processCells(rowCount, columnCount, operation);
-        try {
-            File fileName = new File(destPath+"\\Result.xls");
-            HSSFWorkbook workbook;
-            HSSFSheet sheet;
-            FileInputStream fileIn = null;
-            FileOutputStream fileOut;
-            if(fileName.exists()){
-                System.out.println("It already exists");
-                fileIn = new FileInputStream(fileName);
-                workbook =  new HSSFWorkbook(fileIn);
-                sheet = workbook.getSheetAt(0);
-            }else{
-                System.out.println("It doesnt already exists");
-                FileOutputStream tempFOS=new FileOutputStream(fileName);
-                workbook = new HSSFWorkbook();
-                sheet = workbook.createSheet();
-                workbook.write(tempFOS);
-                tempFOS.close();
-            }
-            fileOut = new FileOutputStream(fileName);
-            HSSFRow row;
-            HSSFCell cell;
-            if(this.flag1){
-                rowDest = Integer.parseInt(jTextField4.getText());
-                columnDest = Integer.parseInt(jTextField5.getText());
-                System.out.println("Used Destination Cell... Row : "+rowDest+" Column "+columnDest+"in flag1");
-            }
-            if(this.flag2){
-                String cName = jTextField8.getText();
-                int Loc[] = getCellLocation(cName);
-                rowDest = Loc[1];
-                columnDest = Loc[0];
-                System.out.println("Used Destination Cell... Row : "+rowDest+" Column "+columnDest+"in flag2");
-            }else{
-                int destRowCount=getNoOfRows(workbook.getSheetAt(0));
-                rowDest=destRowCount+1;
-                columnDest=1;
-                System.out.println("Didnt Used Destination Cell... Row : "+rowDest+" Column "+columnDest);
-            }
-            //Destination Code Implementation following....
-            if(processedData.length == 1){
-                int resultRowCount=getNoOfRows(workbook.getSheetAt(0));
-                System.out.println("Row: "+rowDest+" Column: "+columnDest+" ProcessedData: "+processedData[0]+" ResultRowCount "+resultRowCount);
-                if(rowDest<=resultRowCount){
-                    row = sheet.getRow(rowDest-1);
-                    cell = row.createCell(columnDest-1);
-                }
-                else{
-                    row = sheet.createRow(rowDest-1);
-                    cell = row.createCell(columnDest-1);
-                }
-                cell.setCellValue(processedData[0]);
-            }else{
-                for(int j=0; j<processedData.length; j++, rowDest++){
-                    int resultRowCount=getNoOfRows(workbook.getSheetAt(0));
-                    System.out.println("Row: "+rowDest+" Column: "+columnDest+" ProcessedData: "+processedData[0]+" ResultRowCount "+resultRowCount);
-                    if(rowDest<=resultRowCount){
-                        row = sheet.getRow(rowDest-1);
-                        cell = row.createCell(columnDest-1);
-                    }else{
-                        row = sheet.createRow(rowDest-1);
-                        cell = row.createCell(columnDest-1);
-                    }
-                    cell.setCellValue(processedData[j]);
-                }
-            }
-            workbook.write(fileOut);
-            fileOut.close();
-            if(fileIn != null) fileIn.close();
+            this.processCells(getRowCount(), getColCount(),workbook);
             jProgressBar1.setValue(100);
             System.out.println("File Successfully written to : "+destPath+"\\Result.xls");
             jLabel5.setText("File Successfully written to : "+destPath+"\\Result.xls");
-            
             JOptionPane.showMessageDialog(rootPane,"File Operation Successful!!");
             } catch (FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(rootPane,"File Result.xls is open somewhere\nClose it and try again.");
                 Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
+            }catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(rootPane,"Enter Correct Values of Cell and Try Again..!!");
+                clearCellValues();
                 Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(rootPane,"Internal Error Occured. Please Try Again!!");
-                this.reset();
-            }
-        }catch(ArrayIndexOutOfBoundsException e){
-            JOptionPane.showMessageDialog(rootPane,"Enter Correct Values of Cell and Try Again..!!");
-            jTextField7.setText("");
-            if(this.flag2){
-                this.jTextField8.setText("");
-            }
-        }catch(InvalidCellValueException ex){
+            } catch (IOException ex) {
+                    Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvalidCellValueException ex) {
             Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
-            jOptionPane1.showMessageDialog(rootPane,"Wrong Cell Value. Enter Correct Cell Value!!");
-            this.jTextField7.setText("");
-            if(this.flag2){
-                this.jTextField8.setText("");
-            }
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(rootPane,"Enter Correct Values of Cell and Try Again..!!");
-            this.jTextField2.setText("");
-            this.jTextField3.setText("");
-            if(this.flag1){
-                this.jTextField4.setText("");
-                this.jTextField5.setText("");
-            }
-            else{
-                this.jTextField4.setEditable(true);
-                this.jTextField4.setText("");
-                this.jTextField4.setEditable(false);
-                this.jTextField5.setEditable(true);
-                this.jTextField5.setText("");
-                this.jTextField5.setEditable(false);
-            }
-        }catch(FileNotFoundException ex){
-            if(this.path.equals("")){
-                JOptionPane.showMessageDialog(rootPane,"Select File First..!!");
-            }
-            else if(this.jTextField6.getText().equals("Select Destination Folder...")){
-                JOptionPane.showMessageDialog(rootPane,"Select Destination First..!!");
-            }
-        } 
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
-    private int getNoOfRows(HSSFSheet tempsheet){
-        int destRowCount=0;
-                    for (Row temprow : tempsheet) {
-                        /*for (Cell tempcell : temprow) {
-                            destRowCount++;
-                        }*/
-                        destRowCount++;
-                    }
-                    return destRowCount;
-    }
+
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setMultiSelectionEnabled(true);
@@ -672,79 +535,235 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        this.reset();
+        this.jTextField1.setEditable(true);
+        this.jTextField1.setText("Browse Files from here...");
+        this.jTextField1.setEditable(false);
+        this.jTextField2.setText("");
+        this.jTextField3.setText("");
+        if(this.flag1){
+            this.jTextField4.setText("");
+            this.jTextField5.setText("");
+        }
+        else{
+            this.jTextField4.setEditable(true);
+            this.jTextField4.setText("");
+            this.jTextField4.setEditable(false);
+            this.jTextField5.setEditable(true);
+            this.jTextField5.setText("");
+            this.jTextField5.setEditable(false);
+        }
+        this.jTextField6.setEditable(true);
+        this.jTextField6.setText("Select Destination Folder...");
+        this.jTextField6.setEditable(false);
+        this.jLabel5.setText("");
+        this.jLabel5.setVisible(false);
+        System.out.println("Reset Executed");
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         System.out.println("Value of Flag Before: "+this.flag1);
         this.jTextField4.setEditable(!this.flag1);
         this.jTextField5.setEditable(!this.flag1);
         this.flag1=!this.flag1;
-        System.out.println("Value of Flag After: "+this.flag1);
+        System.out.println("Value of Flag Aft: "+this.flag1);
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        System.out.println("Value of Flag Before: "+this.flag2);
+       System.out.println("Value of Flag Before: "+this.flag2);
         this.jTextField8.setEditable(!this.flag2);
         this.jTextField5.setEditable(!this.flag2);
         this.flag2=!this.flag2;
         System.out.println("Value of Flag After: "+this.flag2);
     }//GEN-LAST:event_jCheckBox2ActionPerformed
-
-    private double[] processCells(int rowSrc, int columnSrc, String opType){
+    public int getNoOfRows(HSSFSheet tempsheet){
+    int destRowCount=0;
+        for (Row temprow : tempsheet) {
+            /*for (Cell tempcell : temprow) {
+                destRowCount++;
+              }*/
+              destRowCount++;
+        }
+        return destRowCount;
+    }
+    public void refineFile(String fileName) throws FileNotFoundException, IOException{
+        File file=new File(fileName);
+        HSSFWorkbook workbook;
+            if(file.exists()){
+                System.out.println("It already exists");  
+            }else{
+                System.out.println("It doesnt already exists");
+                FileOutputStream tempFOS=new FileOutputStream(file);
+                workbook = new HSSFWorkbook();
+                workbook.createSheet();
+                workbook.write(tempFOS);
+                tempFOS.close();
+            }
+    }
+    public int getRowDestination(HSSFWorkbook workbook){
+        int rowDest;
+        if(this.flag1){
+                rowDest = Integer.parseInt(jTextField4.getText());
+                System.out.println("Used Destination Cell... Row : "+rowDest);
+            }
+        else if(this.flag2){
+            String cName = jTextField8.getText();
+            int Loc[] = getCellLocation(cName);
+            rowDest = Loc[1];
+            //columnDest = Loc[0];
+            System.out.println("Used Destination Cell... Row : "+rowDest);
+        }
+        else{
+            int destRowCount=getNoOfRows(workbook.getSheetAt(0));
+            rowDest=destRowCount+1;
+            System.out.println("Didnt Use Destination Cell... Row : "+rowDest);
+        }
+        return rowDest;
+    }
+    public int getColDestination(){
+        int colDest;
+        if(this.flag1){
+                colDest = Integer.parseInt(jTextField5.getText());
+                System.out.println("Used Destination Cell... Col : "+colDest);
+            }
+        else if(this.flag2){
+            String cName = jTextField8.getText();
+            int Loc[] = getCellLocation(cName);
+            //rowDest = Loc[1];
+            colDest = Loc[0];
+            System.out.println("Used Destination Cell... Column :" +colDest+"in flag2");
+        }
+        else{
+            colDest=1;
+            System.out.println("Didnt Use Destination Cell... col : "+colDest);
+        }
+        return colDest;
+    }
+    public HSSFCell createOneOutputCell(int rowDest,int columnDest,HSSFWorkbook workbook){
+        HSSFRow row;
+        HSSFCell cell;
+        int resultRowCount=getNoOfRows(workbook.getSheetAt(0));
+        System.out.println("Row: "+rowDest+" Column: "+columnDest+" ResultRowCount "+resultRowCount);
+            if(rowDest<=resultRowCount){
+                    row = workbook.getSheetAt(0).getRow(rowDest-1);
+                    cell = row.createCell(columnDest-1);
+                }
+                else{
+                    row = workbook.getSheetAt(0).createRow(rowDest-1);
+                    cell = row.createCell(columnDest-1);
+                }
+            return cell;
+    }
+    public int getRowCount(){
+        int Count;
+        if(jTextField7.getText().equals("")){
+            System.out.println("in if method of getRowCount");
+            Count = Integer.parseInt(jTextField2.getText());
+            System.out.println("Row Count is: "+Count);
+        }else{
+            System.out.println("in else method of getRowCount");
+            System.out.println("... "+jTextField7.getText());
+            String cellName = jTextField7.getText();
+            int Loc[] = getCellLocation(cellName);
+            Count = Loc[1];
+            System.out.println("Row Count is: "+Count);
+        }
+        return Count;
+    }
+    public int getColCount(){
+        int Count;
+        if(jTextField7.getText().equals("")){
+            System.out.println("in if method of getColCount");
+            Count = Integer.parseInt(jTextField3.getText());
+            System.out.println("Col Count is: "+Count);
+        }else{
+            System.out.println("in else method of getColCount");
+            String cellName = jTextField7.getText();
+            int Loc[] = getCellLocation(cellName);
+            Count = Loc[0];
+            System.out.println("Col Count is: "+Count);
+        }
+        return Count;
+    }
+    public void clearCellValues(){
+        this.jTextField2.setText("");
+        this.jTextField3.setText("");
+        if(this.flag){
+            this.jTextField4.setText("");
+            this.jTextField5.setText("");
+        }
+        else{
+           this.jTextField4.setEditable(true);
+           this.jTextField4.setText("");
+           this.jTextField4.setEditable(false);
+           this.jTextField5.setEditable(true);
+           this.jTextField5.setText("");
+           this.jTextField5.setEditable(false);
+       }
+    }
+    public void fileExceptionTest(){
+        try {
+            if(this.path.equals("")||(this.jTextField6.getText().equals("Select Destination Folder..."))){
+                throw new FileNotFoundException();
+            }
+        }catch (FileNotFoundException ex) {
+            if(this.path.equals("")){
+                JOptionPane.showMessageDialog(rootPane,"Select File First..!!");
+            }
+            else if(this.jTextField6.getText().equals("Select Destination Folder...")){
+                JOptionPane.showMessageDialog(rootPane,"Select Destination First..!!");
+            }
+        }
+    }
+    public int getNoOfInputFiles(){
+        filePaths = path.split(";");
+        return filePaths.length;
+    }
+    private void processCells(int rowSrc, int columnSrc,HSSFWorkbook workbook) throws FileNotFoundException, IOException{
+            FileOutputStream fileOut = new FileOutputStream(new File(destPath+"\\Result.xls"));
+            HSSFCell cell;
+            int rowDest;
+            int columnDest;
+            rowDest=getRowDestination(workbook);
+            columnDest=getColDestination();
         jProgressBar1.setValue(10);
         jProgressBar1.setStringPainted(true);
         filePaths = path.split(";");
-        int checkOp=1;
-        double temp[] = new double[filePaths.length];
-        for(int i=0; i<filePaths.length; i++){
+        FileInputStream file;
+        XSSFWorkbook inputWorkbook;
+        for(int i=0; i<this.getNoOfInputFiles(); i++){
             System.out.println(filePaths[i]);
             jProgressBar1.setValue((i+1)*10);
             try {
-                FileInputStream file = new FileInputStream(new File(filePaths[i]));
-                XSSFWorkbook workbook = new XSSFWorkbook(file);
-                XSSFSheet sheet = workbook.getSheetAt(0);
-                XSSFRow rowId = sheet.getRow(rowSrc-1);
-                XSSFCell cell = rowId.getCell(columnSrc-1);
+                file = new FileInputStream(new File(filePaths[i]));
+                inputWorkbook = new XSSFWorkbook(file);
+                XSSFRow rowId = inputWorkbook.getSheetAt(0).getRow(rowSrc-1);
+                XSSFCell cellID = rowId.getCell(columnSrc-1);
                 jProgressBar1.setValue((i+1)*10+10);
-                double cellValue = cell.getNumericCellValue();
-                if(opType.equals("Addition")){
-                    checkOp=1;
-                }
-                else if(opType.equals("NoOperation(Append all cells)")){
-                    checkOp=2;
-                }
-                switch(checkOp){
-                    case  1:
-                        temp[0] += cellValue;
-                        jProgressBar1.setValue((i+1)*10+20);
+                switch(cellID.getCellType()){
+                    case XSSFCell.CELL_TYPE_STRING:
+                        cell=createOneOutputCell(rowDest++,columnDest,workbook);
+                        cell.setCellValue(cellID.getStringCellValue());
                         break;
-                    case  2:
-                        temp[i] = cellValue;
+                    case XSSFCell.CELL_TYPE_NUMERIC:
+                        cell=createOneOutputCell(rowDest++,columnDest,workbook);
+                        cell.setCellValue(cellID.getNumericCellValue());
                         break;
-                    default:
-                        //yet to implement...
                 }
-                
+                jProgressBar1.setValue((i+1)*10+20);
             }catch (FileNotFoundException ex) {
                     Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        workbook.write(fileOut);
+        fileOut.close();
         jProgressBar1.setValue(70);
-        switch (checkOp){
-            case 1 : 
-                double sendValue[] = new double[1];
-                sendValue[0] = temp[0];
-                return sendValue;
-            case 2 :
-                return temp;
-        }
-        return null;
-        
     }
-    
     private int[] getCellLocation(String cell) throws ArrayIndexOutOfBoundsException{
         int tempColLoc = 0;
         int[] locations = new int[2];
@@ -819,6 +838,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             }
         });
     }
+    boolean flag=false;
     private String destPath = "";
     private String path = "";
     private int rowCount;
@@ -838,7 +858,6 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLabel1;
@@ -849,13 +868,12 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JOptionPane jOptionPane1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
