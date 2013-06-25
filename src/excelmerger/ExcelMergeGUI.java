@@ -38,6 +38,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
      * Creates new form ExcelMergeGUI
      */
     public ExcelMergeGUI() {
+        //ExcelMergeGUI.setDefaultLookAndFeelDecorated(rootPaneCheckingEnabled);
         initComponents();
         this.jLabel5.setVisible(false);
     }
@@ -56,6 +57,9 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         jDialog2 = new javax.swing.JDialog();
         buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane3 = new javax.swing.JTabbedPane();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jTabbedPane4 = new javax.swing.JTabbedPane();
+        jTabbedPane5 = new javax.swing.JTabbedPane();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -141,8 +145,6 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        jLabel5.setText("jLabel5");
 
         jTextField6.setEditable(false);
         jTextField6.setText("Select Destination Folder...");
@@ -265,7 +267,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(310, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,7 +275,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -285,7 +287,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jCheckBox1))
-                        .addContainerGap(72, Short.MAX_VALUE))))
+                        .addContainerGap(75, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,7 +360,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -381,24 +383,23 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                                     .addComponent(jButton1))
                                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(0, 17, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
@@ -406,7 +407,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -535,33 +536,11 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        this.jTextField1.setEditable(true);
-        this.jTextField1.setText("Browse Files from here...");
-        this.jTextField1.setEditable(false);
-        this.jTextField2.setText("");
-        this.jTextField3.setText("");
-        if(this.flag1){
-            this.jTextField4.setText("");
-            this.jTextField5.setText("");
-        }
-        else{
-            this.jTextField4.setEditable(true);
-            this.jTextField4.setText("");
-            this.jTextField4.setEditable(false);
-            this.jTextField5.setEditable(true);
-            this.jTextField5.setText("");
-            this.jTextField5.setEditable(false);
-        }
-        this.jTextField6.setEditable(true);
-        this.jTextField6.setText("Select Destination Folder...");
-        this.jTextField6.setEditable(false);
-        this.jLabel5.setText("");
-        this.jLabel5.setVisible(false);
-        System.out.println("Reset Executed");
+        this.reset();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        
+
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -573,7 +552,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-       System.out.println("Value of Flag Before: "+this.flag2);
+        System.out.println("Value of Flag Before: "+this.flag2);
         this.jTextField8.setEditable(!this.flag2);
         this.jTextField5.setEditable(!this.flag2);
         this.flag2=!this.flag2;
@@ -582,10 +561,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     public int getNoOfRows(HSSFSheet tempsheet){
     int destRowCount=0;
         for (Row temprow : tempsheet) {
-            /*for (Cell tempcell : temprow) {
-                destRowCount++;
-              }*/
-              destRowCount++;
+            destRowCount++;
         }
         return destRowCount;
     }
@@ -613,7 +589,6 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             String cName = jTextField8.getText();
             int Loc[] = getCellLocation(cName);
             rowDest = Loc[1];
-            //columnDest = Loc[0];
             System.out.println("Used Destination Cell... Row : "+rowDest);
         }
         else{
@@ -632,7 +607,6 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         else if(this.flag2){
             String cName = jTextField8.getText();
             int Loc[] = getCellLocation(cName);
-            //rowDest = Loc[1];
             colDest = Loc[0];
             System.out.println("Used Destination Cell... Column :" +colDest+"in flag2");
         }
@@ -647,25 +621,21 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         HSSFCell cell;
         int resultRowCount=getNoOfRows(workbook.getSheetAt(0));
         System.out.println("Row: "+rowDest+" Column: "+columnDest+" ResultRowCount "+resultRowCount);
-            if(rowDest<=resultRowCount){
-                    row = workbook.getSheetAt(0).getRow(rowDest-1);
-                    cell = row.createCell(columnDest-1);
-                }
-                else{
-                    row = workbook.getSheetAt(0).createRow(rowDest-1);
-                    cell = row.createCell(columnDest-1);
-                }
+        try{
+            row = workbook.getSheetAt(0).getRow(rowDest-1);
+            cell = row.createCell(columnDest-1);
+        }catch(NullPointerException ex){
+            row = workbook.getSheetAt(0).createRow(rowDest-1);
+            cell = row.createCell(columnDest-1);
+        }
             return cell;
     }
     public int getRowCount(){
         int Count;
         if(jTextField7.getText().equals("")){
-            System.out.println("in if method of getRowCount");
             Count = Integer.parseInt(jTextField2.getText());
             System.out.println("Row Count is: "+Count);
         }else{
-            System.out.println("in else method of getRowCount");
-            System.out.println("... "+jTextField7.getText());
             String cellName = jTextField7.getText();
             int Loc[] = getCellLocation(cellName);
             Count = Loc[1];
@@ -676,11 +646,9 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     public int getColCount(){
         int Count;
         if(jTextField7.getText().equals("")){
-            System.out.println("in if method of getColCount");
             Count = Integer.parseInt(jTextField3.getText());
             System.out.println("Col Count is: "+Count);
         }else{
-            System.out.println("in else method of getColCount");
             String cellName = jTextField7.getText();
             int Loc[] = getCellLocation(cellName);
             Count = Loc[0];
@@ -790,8 +758,6 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     private void reset(){
         this.destPath = "";
         this.path = "";
-        this.rowCount = 0;
-        this.columnCount = 0;
         this.filePaths = null;
         this.flag1 = false;
         this.flag2 = false;
@@ -841,8 +807,6 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     boolean flag=false;
     private String destPath = "";
     private String path = "";
-    private int rowCount;
-    private int columnCount;
     private String[] filePaths;
     private boolean flag1=false;
     private boolean flag2=false;
@@ -876,7 +840,10 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTabbedPane jTabbedPane4;
+    private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
