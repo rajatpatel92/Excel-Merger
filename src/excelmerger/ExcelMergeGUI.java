@@ -429,7 +429,6 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         jProgressBar1.setValue(50);
         jProgressBar1.setStringPainted(true);
         int returnVal = fileChooser.showOpenDialog(jButton1);
-        
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File[] file = fileChooser.getSelectedFiles();
             for(int i=0; i<file.length; i++){
@@ -446,6 +445,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
           
+    @SuppressWarnings("empty-statement")
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jLabel5.setText("Processing....please wait!!");
         try {
@@ -461,7 +461,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             jLabel5.setText("File Successfully written to : "+destPath+"\\Result.xls");
             JOptionPane.showMessageDialog(rootPane,"File Operation Successful!!");
             } catch (FileNotFoundException ex) {
-                JOptionPane.showMessageDialog(rootPane,"File Result.xls is open somewhere\nClose it and try again.");
+                fileExceptionTest();
                 Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
             }catch(NumberFormatException ex){
                 JOptionPane.showMessageDialog(rootPane,"Enter Correct Values of Cell and Try Again..!!");
@@ -531,7 +531,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField6MouseClicked
 
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
-        jOptionPane1.showMessageDialog(rootPane, "This utility is developed by :\n1. Rajat Patel\n2. Nikhil Menghani\n\nSpecial Thanks to Kuntesh Jani Sir to guide us.");
+        JOptionPane.showMessageDialog(rootPane, "This utility is developed by :\n1. Rajat Patel\n2. Nikhil Menghani\n\nSpecial Thanks to Kuntesh Jani Sir to guide us.");
         jOptionPane1.setVisible(true);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
@@ -617,16 +617,12 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         return colDest;
     }
     public HSSFCell createOneOutputCell(int rowDest,int columnDest,HSSFWorkbook workbook){
-        HSSFRow row;
         HSSFCell cell;
-        int resultRowCount=getNoOfRows(workbook.getSheetAt(0));
-        System.out.println("Row: "+rowDest+" Column: "+columnDest+" ResultRowCount "+resultRowCount);
+        System.out.println("Row: "+rowDest+" Column: "+columnDest);//+" ResultRowCount "+resultRowCount);
         try{
-            row = workbook.getSheetAt(0).getRow(rowDest-1);
-            cell = row.createCell(columnDest-1);
+            cell = workbook.getSheetAt(0).getRow(rowDest-1).createCell(columnDest-1);
         }catch(NullPointerException ex){
-            row = workbook.getSheetAt(0).createRow(rowDest-1);
-            cell = row.createCell(columnDest-1);
+            cell = workbook.getSheetAt(0).createRow(rowDest-1).createCell(columnDest-1);
         }
             return cell;
     }
@@ -684,6 +680,9 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             else if(this.jTextField6.getText().equals("Select Destination Folder...")){
                 JOptionPane.showMessageDialog(rootPane,"Select Destination First..!!");
             }
+            else{
+                JOptionPane.showMessageDialog(rootPane,"File Result.xls is open somewhere\nClose it and try again.");
+            }
         }
     }
     public int getNoOfInputFiles(){
@@ -691,43 +690,43 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         return filePaths.length;
     }
     private void processCells(int rowSrc, int columnSrc,HSSFWorkbook workbook) throws FileNotFoundException, IOException{
-            FileOutputStream fileOut = new FileOutputStream(new File(destPath+"\\Result.xls"));
-            HSSFCell cell;
-            int rowDest;
-            int columnDest;
-            rowDest=getRowDestination(workbook);
-            columnDest=getColDestination();
+        FileOutputStream fileOut = new FileOutputStream(new File(destPath+"\\Result.xls"));
+        HSSFCell cell;
+        int rowDest;
+        int columnDest;
+        rowDest=getRowDestination(workbook);
+        columnDest=getColDestination();
         jProgressBar1.setValue(10);
         jProgressBar1.setStringPainted(true);
         filePaths = path.split(";");
         FileInputStream file;
         XSSFWorkbook inputWorkbook;
         for(int i=0; i<this.getNoOfInputFiles(); i++){
-            System.out.println(filePaths[i]);
-            jProgressBar1.setValue((i+1)*10);
-            try {
-                file = new FileInputStream(new File(filePaths[i]));
-                inputWorkbook = new XSSFWorkbook(file);
-                XSSFRow rowId = inputWorkbook.getSheetAt(0).getRow(rowSrc-1);
-                XSSFCell cellID = rowId.getCell(columnSrc-1);
-                jProgressBar1.setValue((i+1)*10+10);
-                switch(cellID.getCellType()){
-                    case XSSFCell.CELL_TYPE_STRING:
-                        cell=createOneOutputCell(rowDest++,columnDest,workbook);
-                        cell.setCellValue(cellID.getStringCellValue());
-                        break;
-                    case XSSFCell.CELL_TYPE_NUMERIC:
-                        cell=createOneOutputCell(rowDest++,columnDest,workbook);
-                        cell.setCellValue(cellID.getNumericCellValue());
-                        break;
-                }
-                jProgressBar1.setValue((i+1)*10+20);
-            }catch (FileNotFoundException ex) {
-                    Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
+        System.out.println(filePaths[i]);
+        jProgressBar1.setValue((i+1)*10);
+        try {
+            file = new FileInputStream(new File(filePaths[i]));
+            inputWorkbook = new XSSFWorkbook(file);
+            XSSFRow rowId = inputWorkbook.getSheetAt(0).getRow(rowSrc-1);
+            XSSFCell cellID = rowId.getCell(columnSrc-1);
+            jProgressBar1.setValue((i+1)*10+10);
+            switch(cellID.getCellType()){
+                case XSSFCell.CELL_TYPE_STRING:
+                    cell=createOneOutputCell(rowDest++,columnDest,workbook);
+                    cell.setCellValue(cellID.getStringCellValue());
+                    break;
+                case XSSFCell.CELL_TYPE_NUMERIC:
+                    cell=createOneOutputCell(rowDest++,columnDest,workbook);
+                    cell.setCellValue(cellID.getNumericCellValue());
+                    break;
             }
+            jProgressBar1.setValue((i+1)*10+20);
+        }catch (FileNotFoundException ex) {
+                Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
         workbook.write(fileOut);
         fileOut.close();
         jProgressBar1.setValue(70);
