@@ -117,6 +117,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ExcelMerger");
+        setPreferredSize(new java.awt.Dimension(600, 450));
 
         jTextField1.setEditable(false);
         jTextField1.setText("Browse Files from here...");
