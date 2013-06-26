@@ -184,9 +184,9 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
 
         jTextField8.setEditable(false);
 
-        jLabel11.setText("Enter Source Cell Name :");
+        jLabel11.setText("Enter Source Celll Name(s) :");
 
-        jLabel13.setText("(Must be same on every excel sheet)");
+        jLabel13.setText("(Multiple Cell Names should be saperated by comma)");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -452,10 +452,31 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             refineFile(destPath+"\\Result.xls");
             FileInputStream fileIn = new FileInputStream(new File(destPath+"\\Result.xls"));
             HSSFWorkbook workbook =  new HSSFWorkbook(fileIn);;
-            if (this.jTextField7.getText().length()>3||this.jTextField8.getText().length()>3){
-                throw new InvalidCellValueException("Invalid Cell Value");
+            //if (this.jTextField7.getText().length()>3||this.jTextField8.getText().length()>3){
+              //  throw new InvalidCellValueException("Invalid Cell Value");
+            //}
+            if(checkMultipleCellInput(jTextField7.getText())){
+                int[] source = getSourceCount();
+                int[] destination = getDestinationCount(workbook);
+                if(source.length != destination.length){
+                    throw new InvalidCellValueException("Invalid Cell Value");
+                }
+                
+                for (int i=0; i<source.length; ){
+                    int tempSource[] = new int[2];
+                    int tempDest[] = new int[2];
+                    tempSource[0] = source[i];
+                    tempSource[1] = source[i+1];
+                    tempDest[0] = destination[i];
+                    tempDest[1] = destination[i+1];
+                    this.processCells(tempSource[1], tempSource[0], tempDest[1], tempDest[0], workbook);
+                    i = i+2;
+                }
+            }else{
+                int[] source = getSourceCount();
+                int[] destination = getDestinationCount(workbook);
+                this.processCells(source[1], source[0], destination[1], destination[0], workbook);
             }
-            this.processCells(getRowCount(), getColCount(),workbook);
             jProgressBar1.setValue(100);
             System.out.println("File Successfully written to : "+destPath+"\\Result.xls");
             jLabel5.setText("File Successfully written to : "+destPath+"\\Result.xls");
@@ -469,7 +490,9 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                 Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                     Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvalidCellValueException ex) {
+            //} catch (InvalidCellValueException ex) {
+            //Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidCellValueException ex) {
             Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -604,45 +627,6 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                 tempFOS.close();
             }
     }
-    public int getRowDestination(HSSFWorkbook workbook){
-        int rowDest;
-        if(this.flag1){
-                rowDest = Integer.parseInt(jTextField4.getText());
-                System.out.println("Used Destination Cell... Row : "+rowDest);
-            }
-        else if(this.flag2){
-            String cName = jTextField8.getText();
-            int Loc[] = getCellLocation(cName);
-            rowDest = Loc[1];
-            //columnDest = Loc[0];
-            System.out.println("Used Destination Cell... Row : "+rowDest);
-        }
-        else{
-            int destRowCount=getNoOfRows(workbook.getSheetAt(0));
-            rowDest=destRowCount+1;
-            System.out.println("Didnt Use Destination Cell... Row : "+rowDest);
-        }
-        return rowDest;
-    }
-    public int getColDestination(){
-        int colDest;
-        if(this.flag1){
-                colDest = Integer.parseInt(jTextField5.getText());
-                System.out.println("Used Destination Cell... Col : "+colDest);
-            }
-        else if(this.flag2){
-            String cName = jTextField8.getText();
-            int Loc[] = getCellLocation(cName);
-            //rowDest = Loc[1];
-            colDest = Loc[0];
-            System.out.println("Used Destination Cell... Column :" +colDest+"in flag2");
-        }
-        else{
-            colDest=1;
-            System.out.println("Didnt Use Destination Cell... col : "+colDest);
-        }
-        return colDest;
-    }
     public HSSFCell createOneOutputCell(int rowDest,int columnDest,HSSFWorkbook workbook){
         HSSFRow row;
         HSSFCell cell;
@@ -658,34 +642,76 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                 }
             return cell;
     }
-    public int getRowCount(){
-        int Count;
-        if(jTextField7.getText().equals("")){
-            System.out.println("in if method of getRowCount");
-            Count = Integer.parseInt(jTextField2.getText());
-            System.out.println("Row Count is: "+Count);
+    
+    private boolean checkMultipleCellInput(String input){
+        if(input.trim().contains(",")){
+            return true;
         }else{
-            System.out.println("in else method of getRowCount");
-            System.out.println("... "+jTextField7.getText());
-            String cellName = jTextField7.getText();
-            int Loc[] = getCellLocation(cellName);
-            Count = Loc[1];
-            System.out.println("Row Count is: "+Count);
+            return false;
         }
-        return Count;
     }
-    public int getColCount(){
-        int Count;
+    
+    public int[] getSourceCount(){
+        int[] Count = null;
         if(jTextField7.getText().equals("")){
             System.out.println("in if method of getColCount");
-            Count = Integer.parseInt(jTextField3.getText());
+            Count[0] = Integer.parseInt(jTextField3.getText());
+            Count[1] = Integer.parseInt(jTextField2.getText());
             System.out.println("Col Count is: "+Count);
+        }else if(checkMultipleCellInput(jTextField7.getText())){
+            String cellNames = jTextField7.getText();
+            String[] cell = cellNames.trim().split(",");
+            int Loc[] = new int[cell.length*2];
+            int temp[];
+            for(int i=0; i<cell.length; i++){
+                temp = getCellLocation(cell[i]);
+                for(int j=0; j<temp.length; j++){
+                    Loc[j] = temp[j];
+                }
+            }
+            Count = Loc;
+            System.out.println("Output array length = "+Count.length);
         }else{
             System.out.println("in else method of getColCount");
             String cellName = jTextField7.getText();
             int Loc[] = getCellLocation(cellName);
-            Count = Loc[0];
+            Count= Loc;
             System.out.println("Col Count is: "+Count);
+        }
+        return Count;
+    }
+    
+    public int[] getDestinationCount(HSSFWorkbook workbook){
+        int[] Count = null;
+        if(this.flag1){
+                Count[1] = Integer.parseInt(jTextField4.getText());
+                Count[0] = Integer.parseInt(jTextField5.getText());
+                //System.out.println("Used Destination Cell... Row : "+rowDest);
+            }
+        else if(this.flag2){
+            String cName = jTextField8.getText();
+            if(checkMultipleCellInput(cName)){
+                String[] cell = cName.trim().split(",");
+                int Loc[] = new int[cell.length*2];
+                int temp[];
+                for(int i=0; i<cell.length; i++){
+                    temp = getCellLocation(cell[i]);
+                    for(int j=0; j<temp.length; j++){
+                        Loc[j] = temp[j];
+                    }
+                }
+                Count = Loc;
+            }else{
+                int Loc[] = getCellLocation(cName);
+                Count = Loc;
+            }
+            //System.out.println("Used Destination Cell... Row : "+rowDest);
+        }
+        else{
+            int destRowCount=getNoOfRows(workbook.getSheetAt(0));
+            Count[1]=destRowCount+1;
+            Count[0]=1;
+            //System.out.println("Didnt Use Destination Cell... Row : "+rowDest);
         }
         return Count;
     }
@@ -719,23 +745,15 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             }
         }
     }
-    public int getNoOfInputFiles(){
-        filePaths = path.split(";");
-        return filePaths.length;
-    }
-    private void processCells(int rowSrc, int columnSrc,HSSFWorkbook workbook) throws FileNotFoundException, IOException{
-            FileOutputStream fileOut = new FileOutputStream(new File(destPath+"\\Result.xls"));
-            HSSFCell cell;
-            int rowDest;
-            int columnDest;
-            rowDest=getRowDestination(workbook);
-            columnDest=getColDestination();
+    private void processCells(int rowSrc, int columnSrc,int rowDest, int columnDest, HSSFWorkbook workbook) throws FileNotFoundException, IOException{
+        FileOutputStream fileOut = new FileOutputStream(new File(destPath+"\\Result.xls"));
+        HSSFCell cell;
         jProgressBar1.setValue(10);
         jProgressBar1.setStringPainted(true);
         filePaths = path.split(";");
         FileInputStream file;
         XSSFWorkbook inputWorkbook;
-        for(int i=0; i<this.getNoOfInputFiles(); i++){
+        for(int i=0; i<this.filePaths.length; i++){
             System.out.println(filePaths[i]);
             jProgressBar1.setValue((i+1)*10);
             try {
@@ -754,6 +772,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                         cell.setCellValue(cellID.getNumericCellValue());
                         break;
                 }
+                file.close();
                 jProgressBar1.setValue((i+1)*10+20);
             }catch (FileNotFoundException ex) {
                     Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -778,8 +797,8 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         }
         for (int i=0; i<charArray.length; i++){
             if(i==0)tempColLoc = temp[i];
-            if(i==1)tempColLoc += temp[i-1]*26;
-            if(i==2)tempColLoc += temp[i-2]*26;
+            if(i==1)tempColLoc += temp[i+1]*26;
+            if(i==2)tempColLoc += temp[i+2]*26;
             System.out.println(tempColLoc);
         }
         locations[1] = Integer.parseInt(splitStrings[1]);

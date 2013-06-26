@@ -340,12 +340,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Enter Source Cell Name :"/>
+                <Property name="text" type="java.lang.String" value="Enter Source Celll Name(s) :"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
-                <Property name="text" type="java.lang.String" value="(Must be same on every excel sheet)"/>
+                <Property name="text" type="java.lang.String" value="(Multiple Cell Names should be saperated by comma)"/>
               </Properties>
             </Component>
           </SubComponents>
