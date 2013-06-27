@@ -392,14 +392,14 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
@@ -407,7 +407,7 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -448,29 +448,27 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
           
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jLabel5.setText("Processing....please wait!!");
+        //this.fileExceptionTest();
         try {
+            if(this.path.equals("")||(this.jTextField6.getText().equals("Select Destination Folder..."))){
+                throw new FileNotFoundException();
+            }
+            //this.fileExceptionTest();
             refineFile(destPath+"\\Result.xls");
             FileInputStream fileIn = new FileInputStream(new File(destPath+"\\Result.xls"));
             HSSFWorkbook workbook =  new HSSFWorkbook(fileIn);;
-            //if (this.jTextField7.getText().length()>3||this.jTextField8.getText().length()>3){
-              //  throw new InvalidCellValueException("Invalid Cell Value");
-            //}
+            if ((this.jTextField7.getText().length()>3||this.jTextField8.getText().length()>3) && (!jTextField7.getText().contains(",")||!jTextField8.getText().contains(","))){
+                throw new InvalidCellValueException("Invalid Cell Value");
+            }
             if(checkMultipleCellInput(jTextField7.getText())){
                 int[] source = getSourceCount();
                 int[] destination = getDestinationCount(workbook);
                 if(source.length != destination.length){
                     throw new InvalidCellValueException("Invalid Cell Value");
                 }
-                
                 for (int i=0; i<source.length; ){
-                    int tempSource[] = new int[2];
-                    int tempDest[] = new int[2];
-                    tempSource[0] = source[i];
-                    tempSource[1] = source[i+1];
-                    tempDest[0] = destination[i];
-                    tempDest[1] = destination[i+1];
-                    this.processCells(tempSource[1], tempSource[0], tempDest[1], tempDest[0], workbook);
-                    i = i+2;
+                    this.processCells(source[i+1], source[i], destination[i+1], destination[i], workbook);
+                    i = i + 2;
                 }
             }else{
                 int[] source = getSourceCount();
@@ -482,19 +480,29 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             jLabel5.setText("File Successfully written to : "+destPath+"\\Result.xls");
             JOptionPane.showMessageDialog(rootPane,"File Operation Successful!!");
             } catch (FileNotFoundException ex) {
-                JOptionPane.showMessageDialog(rootPane,"File Result.xls is open somewhere\nClose it and try again.");
-                Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
+                if(this.path.equals("")){
+                    JOptionPane.showMessageDialog(rootPane,"Select File First..!!");
+                }else if(this.jTextField6.getText().equals("Select Destination Folder...")){
+                    JOptionPane.showMessageDialog(rootPane,"Select Destination First..!!");
+                }else{
+                    JOptionPane.showMessageDialog(rootPane,"File Result.xls is open somewhere\nClose it and try again.");
+                    Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }catch(NumberFormatException ex){
                 JOptionPane.showMessageDialog(rootPane,"Enter Correct Values of Cell and Try Again..!!");
                 clearCellValues();
                 Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                     Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
-            //} catch (InvalidCellValueException ex) {
-            //Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidCellValueException ex) {
+            } catch (InvalidCellValueException ex) {
+                Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(rootPane,"Enter Correct Values of Cell and Try Again..!!");
+                clearCellValues();
+        } /*catch (InvalidCellValueException ex) {
+            JOptionPane.showMessageDialog(rootPane,"Enter Correct Values of Cell and Try Again..!!");
+            clearCellValues();
             Logger.getLogger(ExcelMergeGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
@@ -658,16 +666,18 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
             Count[0] = Integer.parseInt(jTextField3.getText());
             Count[1] = Integer.parseInt(jTextField2.getText());
             System.out.println("Col Count is: "+Count);
-        }else if(checkMultipleCellInput(jTextField7.getText())){
+        }
+        if(checkMultipleCellInput(jTextField7.getText())){
             String cellNames = jTextField7.getText();
             String[] cell = cellNames.trim().split(",");
             int Loc[] = new int[cell.length*2];
-            int temp[];
-            for(int i=0; i<cell.length; i++){
-                temp = getCellLocation(cell[i]);
-                for(int j=0; j<temp.length; j++){
-                    Loc[j] = temp[j];
-                }
+            int[] temp = new int[2];
+            for(int i=0, k=0; i<cell.length*2 && k<cell.length; k++){
+                System.out.println(cell[k]);
+                temp = getCellLocation(cell[k]);
+                Loc[i] = temp[0];
+                Loc[i+1] = temp[1];
+                i = i+2;
             }
             Count = Loc;
             System.out.println("Output array length = "+Count.length);
@@ -686,38 +696,53 @@ public class ExcelMergeGUI extends javax.swing.JFrame {
         if(this.flag1){
                 Count[1] = Integer.parseInt(jTextField4.getText());
                 Count[0] = Integer.parseInt(jTextField5.getText());
-                //System.out.println("Used Destination Cell... Row : "+rowDest);
             }
         else if(this.flag2){
             String cName = jTextField8.getText();
             if(checkMultipleCellInput(cName)){
                 String[] cell = cName.trim().split(",");
                 int Loc[] = new int[cell.length*2];
-                int temp[];
-                for(int i=0; i<cell.length; i++){
-                    temp = getCellLocation(cell[i]);
-                    for(int j=0; j<temp.length; j++){
-                        Loc[j] = temp[j];
-                    }
+                int temp[] = new int[2];
+                for(int i=0, k=0; i<cell.length*2 && k<cell.length; k++){
+                    System.out.println(cell[k]);
+                    temp = getCellLocation(cell[k]);
+                    Loc[i] = temp[0];
+                    Loc[i+1] = temp[1];
+                    i = i+2;
                 }
                 Count = Loc;
             }else{
                 int Loc[] = getCellLocation(cName);
                 Count = Loc;
             }
-            //System.out.println("Used Destination Cell... Row : "+rowDest);
-        }
-        else{
-            int destRowCount=getNoOfRows(workbook.getSheetAt(0));
-            Count[1]=destRowCount+1;
-            Count[0]=1;
-            //System.out.println("Didnt Use Destination Cell... Row : "+rowDest);
+        }else{
+            if(checkMultipleCellInput(jTextField7.getText())){
+                int destRowCount=getNoOfRows(workbook.getSheetAt(0));
+                int cellCount = jTextField7.getText().trim().split(",").length;
+                int Loc[] = new int[cellCount*2];
+                for(int i=0, k=1; i<cellCount*2 && k<=cellCount; k++){
+                    Loc[i] = k;
+                    Loc[i+1] = destRowCount+1;
+                    System.out.println("Destination count latest : "+Loc[i]+" "+Loc[i+1]);
+                    i = i + 2;
+                    
+                }
+                Count = Loc;
+            }else{
+                int destRowCount=getNoOfRows(workbook.getSheetAt(0));
+                Count = new int[2];
+                Count[1]=destRowCount+1;
+                Count[0]=1;
+            }
+            
         }
         return Count;
     }
     public void clearCellValues(){
         this.jTextField2.setText("");
         this.jTextField3.setText("");
+        this.jTextField7.setText("");
+        this.jTextField8.setText("");
         if(this.flag){
             this.jTextField4.setText("");
             this.jTextField5.setText("");
